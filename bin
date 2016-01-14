@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var File = require('./lib/file');
+var pushFile = require('./lib/pushFile');
+
+for (var i = 2; i < process.argv.length; i++) {
+	var file = new File(process.argv[i]);
+	var needpush = file.picHas();
+	pushFile.pushFile(file.absolutePath, file.absolutePath);
+	for (var i = 0; i < needpush.length; i++) {
+		pushFile.pushFile(needpush[i][0], needpush[i][1]);
+	};
+};
