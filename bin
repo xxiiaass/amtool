@@ -7,7 +7,7 @@ for (var i = 2; i < process.argv.length; i++) {
 	var file = new File(process.argv[i]);
 	var needpush = file.picHas();
 	pushFile.pushFile(file.absolutePath, file.absolutePath);
-	for (var i = 0; i < needpush.length; i++) {
-		pushFile.pushFile(needpush[i][0], needpush[i][1]);
+	for (var j = 0; j < needpush.length; j++) {
+		pushFile.pushFile(needpush[j][0], needpush[j][1]);
 	};
 };
