@@ -1,13 +1,19 @@
-#!/usr/bin/env node
+#!/usr/bin/env node 
 
 var File = require('./lib/file');
 var pushFile = require('./lib/pushFile');
 
+var fileTools = require('./lib/fileTools');
+
 for (var i = 2; i < process.argv.length; i++) {
 	var file = new File(process.argv[i]);
 	var needpush = file.picHas();
-	pushFile.pushFile(file.absolutePath, file.absolutePath);
+	for (var k = 0; k < needpush.length; k++) {
+		fileTools.sureExistsSync(needpush[k][0]);
+	};
+	pushFile.pushFile(file.transFilePath, file.absolutePath);
 	for (var j = 0; j < needpush.length; j++) {
 		pushFile.pushFile(needpush[j][0], needpush[j][1]);
 	};
+	fs.unlinkSync(file.transFilePath)；
 };
